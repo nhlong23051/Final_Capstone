@@ -1,6 +1,16 @@
 import { combineReducers } from "redux";
 import { loginReducer } from "../page/LoginTemplate/duck/reducer";
+import { getAllProductReducer } from "../page/HomePageTemplate/Project/duck/reducer";
+import { registerReducer } from "../page/RegisterTemplate/duck/reducer";
+import { getAllUserReducer } from "../page/HomePageTemplate/User/duck/reducer";
+import { createProjectReducer } from "../page/HomePageTemplate/CreateProject/duck/reducer";
+import { detailProjectReducer } from "../page/HomePageTemplate/DetailProject/duck/reducer";
 
 export const rootReducer = combineReducers({
-    loginReducer
+    loginReducer,
+    getAllProductReducer,
+    registerReducer,
+    getAllUserReducer,
+    createProjectReducer,
+    detailProjectReducer
 });

@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
+import {createBrowserHistory } from 'history'
 
 
 const root = ReactDOM.createRoot(
@@ -12,11 +13,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
 
-  <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
 );
 
 reportWebVitals();

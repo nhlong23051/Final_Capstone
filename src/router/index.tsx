@@ -4,26 +4,22 @@ import { lazy } from "react";
 const routes = [
     {
         path: "",
-        element: lazy(() => import("../page/HomePageTemplate/index")),
+        element: lazy(() => import("../page/HomePageTemplate")),
         nested: [
-            { path: "", element: lazy(() => import("../page/HomePageTemplate/index")) },
+            { path: "", element: lazy(() => import("../page/HomePageTemplate/Project")) },
+            { path: "profile", element: lazy(() => import("../page/HomePageTemplate/Profile")) },
+            { path: "create-project", element: lazy(() => import("../page/HomePageTemplate/CreateProject")) },
+            { path: "all-user", element: lazy(() => import("../page/HomePageTemplate/User")) },
+            { path: 'project/:id', element: lazy(() => import("../page/HomePageTemplate/DetailProject")) },
+
         ]
     },
 
-    // {
-    //     path: "admin",
-    //     element: lazy(() => import("../page/AdminTemplate")),
-    //     nested: [
-    //         { path: "dashboard", element: lazy(() => import("../page/AdminTemplate/DashBoard")) },
-    //         { path: "manage-user", element: lazy(() => import("../page/AdminTemplate/User"))},
-    //         { path: "add-user", element: lazy(() => import("../page/AdminTemplate/AddUser")) },
-    //         { path: "edit-user/:id", element: lazy(() => import("../page/AdminTemplate/EditUser")) },
-    //         { path: "add-film", element: lazy(() => import("../page/AdminTemplate/AddFilm")) },
-    //         { path: "edit-film/:id", element: lazy(() => import("../page/AdminTemplate/EditFilm")) },
-    //         { path: "add-show-time/:id", element: lazy(() => import("../page/AdminTemplate/AddShowTime")) },
-    //     ],
-    // },
-    { path: "login", element: lazy(() => import("../page/LoginTemplate/LoginPageTemplate")) },
+    { path: "login", element: lazy(() => import("../page/LoginTemplate")) },
+    { path: "register", element: lazy(() => import("../page/RegisterTemplate")) },
+    { path: "*", element: lazy(() => import("../page/404PageTemplate")) },
+
+
 ];
 
 const renderRoutes = () => {
@@ -41,6 +37,7 @@ const renderRoutes = () => {
                                 key={item.path}
                                 path={item.path}
                                 element={<item.element />}
+                                
                             />
                         )
                     })}

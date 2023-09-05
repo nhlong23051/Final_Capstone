@@ -7,8 +7,8 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-    const accessToken = localStorage.getItem('USER_CUSTOMER') ?
-        JSON.parse(localStorage.getItem('USER_CUSTOMER')).accessToken : ''
+    const accessToken = localStorage.getItem('user') ?
+        JSON.parse(localStorage.getItem('user')).accessToken : ''
 
     config.headers = {
         ...config.headers,

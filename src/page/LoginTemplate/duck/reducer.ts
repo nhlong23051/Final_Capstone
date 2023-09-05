@@ -13,7 +13,7 @@ export const loginReducer = (state = initialState, action: TypeAct) => {
             state.loading = true;
             state.data = null;
             state.error = null;
-            
+
             return { ...state }
 
         case types.LOGIN_SUCCESS:
@@ -26,6 +26,12 @@ export const loginReducer = (state = initialState, action: TypeAct) => {
             state.loading = false;
             state.data = null;
             state.error = action.payload;
+            
+            return { ...state }
+
+        case types.LOG_OUT:
+            state.data = null
+            state.error = null
             return { ...state }
 
         default:
