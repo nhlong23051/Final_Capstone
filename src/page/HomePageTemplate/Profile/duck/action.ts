@@ -29,13 +29,12 @@ export const actEditUser = (data: User) => {
         dispatch(actEditUserRequest())
         api.put('Users/editUser', data)
             .then((result) => {
-                console.log(result);
-                setTimeout(()=>{history.go()},500)
 
                 if (result.data.statusCode === 200) {
                     dispatch(actEditUserSuccess(result.data.content))
                 }
-                toast.success('Update success')
+                toast.success('Update success', { autoClose: 2000 })
+                setTimeout(() => { history.go() }, 500)
             })
             .catch((error) => {
                 dispatch(actEditUserFail(error))

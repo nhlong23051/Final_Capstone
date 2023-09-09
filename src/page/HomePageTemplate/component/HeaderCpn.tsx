@@ -30,7 +30,8 @@ export default function HeaderCpn({ }: Props) {
 
     return (
         <Header style={{ padding: 30, height: '60px' }} className='flex items-center justify-between w-full'>
-            <NavLink className='text-4xl text-white' to='/'><HomeOutlined style={{ marginBottom: '15px' }} /></NavLink>
+            <div></div>
+            {/* <NavLink className='text-4xl text-white' to='/'><HomeOutlined style={{ marginBottom: '15px' }} /></NavLink> */}
             <div>
                 <Dropdown menu={{ items }}>
                     <a onClick={(e) => e.preventDefault()}>

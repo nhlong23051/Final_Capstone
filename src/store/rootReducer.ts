@@ -5,6 +5,8 @@ import { registerReducer } from "../page/RegisterTemplate/duck/reducer";
 import { getAllUserReducer } from "../page/HomePageTemplate/User/duck/reducer";
 import { createProjectReducer } from "../page/HomePageTemplate/CreateProject/duck/reducer";
 import { detailProjectReducer } from "../page/HomePageTemplate/DetailProject/duck/reducer";
+import { modalCreateTaskReducer } from "../page/HomePageTemplate/CreateTask/duck/reducer";
+import { editProjectReducer } from "../page/HomePageTemplate/EditProject/duck/reducer";
 
 export const rootReducer = combineReducers({
     loginReducer,
@@ -12,5 +14,7 @@ export const rootReducer = combineReducers({
     registerReducer,
     getAllUserReducer,
     createProjectReducer,
-    detailProjectReducer
+    detailProjectReducer,
+    modalCreateTaskReducer,
+    editProjectReducer
 });

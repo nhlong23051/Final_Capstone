@@ -26,7 +26,7 @@ const actCreateProjectRequest = () => {
 export const actCreateProject = (data: any, navigate: any) => {
     return (dispatch: any) => {
         dispatch(actCreateProjectRequest())
-        api.post('Project/createProject', data)
+        api.post('Project/createProjectAuthorize', data)
             .then((result) => {
                 console.log(result);
 

@@ -1,6 +1,7 @@
 import { Route } from "react-router-dom";
 import { lazy } from "react";
 
+let id: number = 0
 const routes = [
     {
         path: "",
@@ -10,7 +11,8 @@ const routes = [
             { path: "profile", element: lazy(() => import("../page/HomePageTemplate/Profile")) },
             { path: "create-project", element: lazy(() => import("../page/HomePageTemplate/CreateProject")) },
             { path: "all-user", element: lazy(() => import("../page/HomePageTemplate/User")) },
-            { path: 'project/:id', element: lazy(() => import("../page/HomePageTemplate/DetailProject")) },
+            { path: `project/:id`, element: lazy(() => import("../page/HomePageTemplate/DetailProject")) },
+            { path: `edit-project/:id`, element: lazy(() => import("../page/HomePageTemplate/EditProject")) },
 
         ]
     },
@@ -37,7 +39,6 @@ const renderRoutes = () => {
                                 key={item.path}
                                 path={item.path}
                                 element={<item.element />}
-                                
                             />
                         )
                     })}

@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import api from '../../../../Util/apiUtil'
 import * as types from './const'
 import { ActType, DataType } from './types'
@@ -41,5 +42,24 @@ export const actSearchProject = (keyword: string): ActType => {
     return {
         type: types.SEARCH_PROJECT,
         payload: keyword
+    }
+}
+
+export const actDeleteProject = (id: any) => {
+    return (dispatch: any) => {
+        api.delete(`Project/deleteProject?projectId=${id}`)
+            .then((result) => {
+                console.log(result);
+                
+                if (result.data.statusCode === 200) {
+                    toast.success('Delete project success', { autoClose: 2000, position: 'top-center' })
+                    dispatch(actFetchListAllProject())
+                }
+            })
+            .catch((error) => {
+                toast.error(`${error.response.data.content}`, { autoClose: 2000, position: 'top-center' })
+
+                console.log(error);
+            })
     }
 }

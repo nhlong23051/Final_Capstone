@@ -2,6 +2,7 @@ import { replace } from 'formik'
 import api from '../../../../Util/apiUtil'
 import * as types from './const'
 import { toast } from 'react-toastify'
+import { actFetchListAllUser } from '../../User/duck/action'
 
 const actDetailProjectSuccess = (data: any) => {
     return {
@@ -37,11 +38,32 @@ export const actDetailProject = (id: any) => {
             })
     }
 }
+export const actGetUserByProject = (projectId: any) => {
+    return (dispatch: any) => {
+        api.get(`Users/getUserByProjectId?idProject=${projectId}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch({ type: types.GET_USER_BY_PROJECT, payload: result.data.content })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+}
 
-export const actSearchUserName = (keyWord: any) => {
-    return {
-        type: types.SEARCH_USER_NAME,
-        payload: keyWord
+export const actGetAllUser = () => {
+    return (dispatch: any) => {
+        api.get('Users/getUser?keyword=1')
+
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch({ type: types.GET_ALL_USER, payload: result.data.content })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 }
 
@@ -51,17 +73,17 @@ export const actAssignUserProject = (projectId: any, userId: any) => {
         api.post('Project/assignUserProject', data)
             .then((result) => {
                 if (result.data.statusCode === 200) {
+                    dispatch(actGetUserByProject(projectId))
                     dispatch(actDetailProject(projectId))
-                    toast.success('Add user success', { position: 'top-center' })
                 }
             })
             .catch((error) => {
                 toast.error(`${error.response.data.content}`, { autoClose: 2000, position: 'top-center' })
-
-                // console.log(error);
+                console.log(error);
             })
     }
 }
+
 
 export const actRemoveUserFromProject = (projectId: any, userId: any) => {
     return (dispatch: any) => {
@@ -69,14 +91,58 @@ export const actRemoveUserFromProject = (projectId: any, userId: any) => {
         api.post('Project/removeUserFromProject', data)
             .then((result) => {
                 if (result.data.statusCode === 200) {
+                    dispatch(actGetUserByProject(projectId))
                     dispatch(actDetailProject(projectId))
-                    toast.success('Remove user success', { position: 'top-center' })
                 }
             })
             .catch((error) => {
                 toast.error(`${error.response.data.content}`, { autoClose: 2000, position: 'top-center' })
+                console.log(error);
+            })
+    }
+}
 
-                // console.log(error);
+export const actSearchUserName = (keyWord: any) => {
+    return {
+        type: types.SEARCH_USER_NAME,
+        payload: keyWord
+    }
+}
+
+const actGetAllStatus = (data: any) => {
+    return {
+        type: types.GET_ALL_STATUS,
+        payload: data
+    }
+}
+
+export const actFetchListStatus = () => {
+    return (dispatch: any) => {
+        api.get('Status/getAll')
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch(actGetAllStatus(result.data.content))
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+}
+
+export const actUpdateStatus = (taskId: any, statusId: any) => {
+
+    return (dispatch: any) => {
+        const d = { taskId, statusId }
+        api.put('Project/updateStatus', d)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+
+                    // dispatch((result: any) => ({ type: types.GET_ALL_STATUS, payload: result.data.content }))
+                }
+            })
+            .catch((error) => {
+                console.log(error);
             })
     }
 }

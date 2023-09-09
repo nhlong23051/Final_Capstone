@@ -11,18 +11,9 @@ type Props = {}
 
 export default function CreateProject({ }: Props) {
     const editorRef: any = useRef(null);
-    const navigate: any = useNavigate()
     const dispatch: any = useDispatch()
+    const navigate: any = useNavigate()
     const { loadding, error } = useSelector((state: any) => state.createProjectReducer)
-    // const [addUserModal, setAddUserModal] = useState(false)
-
-    // const openModalAddUser = () => {
-    //     setAddUserModal(true)
-    // }
-
-    // const closeModalAddUser = () => {
-    //     setAddUserModal(false)
-    // }
 
     let createProject = {}
     const handleFinish = (values: any) => {
@@ -30,7 +21,6 @@ export default function CreateProject({ }: Props) {
         let description = editorRef.current.getContent()
         createProject = { ...createProject, projectName, categoryId, description }
         dispatch(actCreateProject(createProject, navigate))
-        // openModalAddUser()
     }
 
     return (
@@ -103,12 +93,6 @@ export default function CreateProject({ }: Props) {
                     <button className='bg-gray-300 mr-2 py-2 px-3 rounded  hover:text-white'>Cancel</button>
                 </div>
             </Form >
-            {/* <Modal title='Add user to project' open={addUserModal} onCancel={closeModalAddUser} footer={[]}>
-                <Form>
-                    <Input placeholder='search user name ...' />
-                    <div className='text-xl py-2'>Not yet added</div>
-                </Form>
-            </Modal> */}
         </>
     )
 }

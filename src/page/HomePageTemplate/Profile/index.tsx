@@ -31,76 +31,15 @@ const beforeUpload = (file: RcFile) => {
 export default function Proflie({ }: Props) {
   const myProfile = JSON.parse(localStorage.getItem('user') || '')
   const dispatch: any = useDispatch()
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalConfirm, setModalConfirm] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
   const [loading, setLoading] = useState(false);
-  const [form] = Form.useForm();
-  const [user, updateUser] = useState({
-    id: myProfile.id,
-    passWord: '',
-    email: myProfile.email,
-    name: myProfile.name,
-    phoneNumber: myProfile.phoneNumber,
-  })
-
-  useEffect(() => {
-    if (user.passWord !== '') {
-      console.log(user);
-
-      dispatch(actEditUser(user))
-    }
-  }, [user.passWord])
 
   if (myProfile === '') return <Navigate to='/login' replace={true} />
 
-  // ----------------------- setting modal change password -----------------------------------
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  const onChangePass = (values: any) => {
-    let { passWord, confirm } = values
-
-    updateUser({
-      ...user,
-      passWord,
-    })
-
-    if (passWord && confirm) {
-      setIsModalOpen(false);
-    }
-  };
-
-
-  // ----------------------- setting modal confirm -----------------------------------
-  const showModalConfirm = () => {
-    setModalConfirm(true)
+  const handleUpdate = (values: any) => {
+    console.log(values);
+    dispatch(actEditUser(values))
   }
-
-  const confirmCancel = () => {
-    setModalConfirm(false)
-  }
-
-  const onConfirm = (values: any) => {
-    let { passWord } = values
-
-    updateUser({
-      ...user,
-      passWord,
-    })
-
-
-    if (passWord) {
-      setModalConfirm(false);
-    }
-  };
 
   // ------------------------------ setting Change Avatar -----------------------------------------
 
@@ -125,7 +64,6 @@ export default function Proflie({ }: Props) {
     </div>
   );
 
-
   return (
     <div className='px-52'>
       <p className='text-center text-4xl py-6'>My Profile</p>
@@ -148,134 +86,57 @@ export default function Proflie({ }: Props) {
         </Col>
 
         <Col span={16}>
-          <p className='text-xl'>Hello, {myProfile.name}!</p>
+          <Form onFinish={handleUpdate} className='w-full' initialValues={{
+            id: myProfile.id,
+            passWord: '',
+            email: myProfile.email,
+            name: myProfile.name,
+            phoneNumber: myProfile.phoneNumber,
+          }}>
+            <p className='text-xl'>Hello, {myProfile.name}!</p>
 
-          <label>ID <span className='text-red-500'>*</span></label>
-          <Input className='mb-5' value={myProfile.id} disabled />
+            <label>ID <span className='text-red-500'>*</span></label>
+            <Form.Item name='id'>
+              <Input className='mb-5' defaultValue={myProfile.id} disabled />
+            </Form.Item>
 
-          <label>Email <span className='text-red-500'>*</span></label>
-          <Input className='mb-5' value={myProfile.email} />
+            <label>Email <span className='text-red-500'>*</span></label>
+            <Form.Item name='email'>
+              <Input className='mb-5' defaultValue={myProfile.email} />
+            </Form.Item>
 
-          <label>Name <span className='text-red-500'>*</span></label>
-          <Input className='mb-5' value={myProfile.name} />
+            <label>Name <span className='text-red-500'>*</span></label>
+            <Form.Item name='name'>
+              <Input className='mb-5' defaultValue={myProfile.name}></Input>
+            </Form.Item>
 
-          <label>Phone number <span className='text-red-500'>*</span></label>
-          <Input className='mb-5' value={myProfile.phoneNumber} />
+            <label>Phone number <span className='text-red-500'>*</span></label>
+            <Form.Item name='phoneNumber'>
+              <Input className='mb-5' defaultValue={myProfile.phoneNumber}></Input>
+            </Form.Item>
 
-          <div >Password <span className='text-red-500 pb-4'>*</span>
-            <Button className='ml-4' onClick={showModal}>Change Password</Button>
-          </div>
-          <br />
-          <hr />
-          <div className='flex justify-end'>
-            <Button onClick={showModalConfirm} className='px-10 mx-4 bg-green-700'>Update</Button>
-            <Button><NavLink to='/' >Back to Home</NavLink></Button>
-          </div>
+            <div >Password <span className='text-red-500 pb-4'>*</span>
+              <Form.Item
+                name="passWord"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+            </div>
+            <br />
+            <hr />
+            <div className='flex justify-end'>
+              <button type='submit' className='px-10 mx-4 bg-green-700 rounded hover:text-white'>Update</button>
+              <Button><NavLink to='/' >Back to Home</NavLink></Button>
+            </div>
+          </Form>
         </Col>
       </Row>
-
-
-
-
-      {/* ------------------------ Modal Change Password ------------------------------*/}
-      <Modal title='Change Password' open={isModalOpen} onCancel={handleCancel} footer={[]}>
-        <Form onFinish={onChangePass} form={form} >
-          <div className="mt-2">
-            <label>New password<span className='text-red-500 '>*</span></label>
-            <Form.Item
-              name="passWord"
-              initialValue=''
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-              hasFeedback
-            >
-              <Input.Password />
-            </Form.Item>
-
-            <label>Confirm new password<span className='text-red-500 '>*</span></label>
-            <Form.Item
-              name="confirm"
-              dependencies={['passWord']}
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: 'Please confirm your password!',
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue('passWord') === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(new Error('The new password that you entered do not match!'));
-                  },
-                }),
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-
-          </div>
-          <div className='flex mt-5'>
-            <button
-              type="submit"
-              className="flex mx-2 w-1/2 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Change password
-            </button>
-            <button
-              className="flex mx-2 w-1/2 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-          </div>
-        </Form>
-      </Modal>
-
-
-
-
-      {/* ----------------------------- Modal Confirm ----------------------------------- */}
-      <Modal title='Confirm password' open={modalConfirm} onCancel={confirmCancel} footer={[]}>
-        <Form onFinish={onConfirm} form={form} className='space-y-6'>
-          <div className="mt-2">
-            <label>Your password<span className='text-red-500 '>*</span></label>
-            <Form.Item
-              name="passWord"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-              hasFeedback
-            >
-              <Input.Password />
-            </Form.Item>
-          </div>
-          <div className='flex'>
-            <button
-              type="submit"
-              className="flex mx-2 w-1/2 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Submit
-            </button>
-            <button
-              type="submit"
-              className="flex mx-2 w-1/2 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={confirmCancel}
-            >
-              Cancel
-            </button>
-          </div>
-        </Form>
-      </Modal>
-
     </div >
   )
 }

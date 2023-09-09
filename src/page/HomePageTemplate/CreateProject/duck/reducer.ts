@@ -4,7 +4,7 @@ const initialState = {
     loading: false,
     data: null,
     error: null,
-    keyWord: ''
+    keyWord: '',
 }
 
 export const createProjectReducer = (state = initialState, action:any) => {

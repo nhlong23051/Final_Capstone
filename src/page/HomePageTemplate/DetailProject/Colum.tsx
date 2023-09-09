@@ -8,6 +8,7 @@ type Props = {
 }
 
 export default function Colum({ colum, tasks }: Props) {
+// console.log(colum);
     
     return (
         <>
