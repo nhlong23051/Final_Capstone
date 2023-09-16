@@ -7,6 +7,7 @@ import { createProjectReducer } from "../page/HomePageTemplate/CreateProject/duc
 import { detailProjectReducer } from "../page/HomePageTemplate/DetailProject/duck/reducer";
 import { modalCreateTaskReducer } from "../page/HomePageTemplate/CreateTask/duck/reducer";
 import { editProjectReducer } from "../page/HomePageTemplate/EditProject/duck/reducer";
+import { updateTaskReducer } from "../page/HomePageTemplate/UpdateTask/duck/reducer";
 
 export const rootReducer = combineReducers({
     loginReducer,
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
     createProjectReducer,
     detailProjectReducer,
     modalCreateTaskReducer,
-    editProjectReducer
+    editProjectReducer,
+    updateTaskReducer
 });

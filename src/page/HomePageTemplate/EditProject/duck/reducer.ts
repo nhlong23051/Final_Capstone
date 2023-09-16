@@ -3,9 +3,8 @@ import * as types from './const'
 import React from 'react'
 
 const initialState = {
-    infoProject: null,
+    infoProject: {},
     loading: false,
-    formEdit: null
 }
 
 export const editProjectReducer = (state = initialState, action: any) => {
@@ -14,12 +13,13 @@ export const editProjectReducer = (state = initialState, action: any) => {
         case types.GET_DETAIL_PROJECT:
             state.loading = false
             state.infoProject = action.payload
+            console.log('state', state.infoProject);
 
             return { ...state }
 
         case types.GET_DETAIL_PROJECT_REQUEST:
             state.loading = true
-            state.infoProject = null
+            // state.infoProject = null
             return { ...state }
 
         default:

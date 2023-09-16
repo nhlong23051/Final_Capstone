@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { CLOSE_DRAWER_CREATE_TASK } from './duck/const';
 import { useDispatch } from 'react-redux';
-import CreateTask from '.';
 
 type Props = {}
 

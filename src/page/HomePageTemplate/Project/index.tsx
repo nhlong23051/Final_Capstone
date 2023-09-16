@@ -18,8 +18,8 @@ export default function Project({ }: Props) {
         <Layout>
             <Content style={{ margin: '0 16px' }}>
                 <div style={{ margin: '16px 0' }} className='grid grid-cols-2 items-center justify-center' >
-                    <h2 className='text-center text-4xl'>Project</h2>
-                    <Button className=' w-52 h-14 text-xl font-medium right-0'><NavLink to='/create-project'>Create Project</NavLink></Button>
+                    <h2 className='text-2xl text-center md:text-4xl'>Project</h2>
+                    <Button className=' font-medium w-auto md:w-52 md:h-14 md:text-xl '><NavLink to='/create-project'>Create Project</NavLink></Button>
                 </div>
                 <Search onChange={(e) => dispatch(actSearchProject(e.target.value))} placeholder='Search project ...' className='py-4'></Search>
                 <div style={{ padding: 24, minHeight: 360 }}>

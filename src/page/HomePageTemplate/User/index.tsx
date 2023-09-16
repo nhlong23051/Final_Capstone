@@ -16,12 +16,12 @@ export default function AllUser({ }: Props) {
         <Layout>
             <Content style={{ margin: '0 16px' }}>
                 <div style={{ margin: '16px 0' }} className='text-center' >
-                    <h2 className='text-center text-4xl'>User</h2>
+                    <h2 className='text-center text-3xl md:text-4xl'>User</h2>
                 </div>
                 <Search
                     onChange={(e) => dispatch(actSearchUser(e.target.value))}
                     placeholder='Search user ...'
-                    className='py-4'></Search>
+                    className='py-2'></Search>
                 <div style={{ padding: 24, minHeight: 360 }}>
                     <ContentUser />
                 </div>

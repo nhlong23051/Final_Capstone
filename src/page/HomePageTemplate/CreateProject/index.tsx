@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Form, Input, Select } from 'antd'
 import { Editor } from '@tinymce/tinymce-react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actCreateProject } from './duck/action';
 import { toast } from 'react-toastify';
@@ -25,8 +25,8 @@ export default function CreateProject({ }: Props) {
 
     return (
         <>
-            <p className='text-center text-4xl py-4'>Create Project</p>
-            <Form onFinish={handleFinish} className='px-60'>
+            <p className='text-2xl w-auto text-center md:text-center md:text-4xl py-4'>Create Project</p>
+            <Form onFinish={handleFinish} className='px-2 md:px-48'>
                 <div>
                     <label className='' >Project name<span className='text-red-500'>*</span></label>
                     <Form.Item
@@ -90,7 +90,7 @@ export default function CreateProject({ }: Props) {
                 <div>
                     <button type='submit'
                         className='bg-blue-500 mr-2 py-2 px-3 rounded hover:text-white'>Create</button>
-                    <button className='bg-gray-300 mr-2 py-2 px-3 rounded  hover:text-white'>Cancel</button>
+                    <NavLink to='/' className='bg-gray-300 mr-2 py-2 px-3 rounded  hover:text-white'>Cancel</NavLink>
                 </div>
             </Form >
         </>

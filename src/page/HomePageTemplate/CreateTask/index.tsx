@@ -43,7 +43,7 @@ export default function CreateTask({ defaultNameProject }: Props) {
     return (
         <>
             <div className='text-center text-xl'>Create task</div>
-            <Form onFinish={handleValue}>
+            <Form  onFinish={handleValue}>
                 <div>
                     <label className='' >Project<span className='text-red-500'>*</span></label>
                     <Form.Item
@@ -164,6 +164,7 @@ export default function CreateTask({ defaultNameProject }: Props) {
 
                 <div className='grid grid-cols-2 pt-5'>
                     <div className='w-3/4'>
+                        <label>Time remaining</label>
                         <Form.Item
                             rules={[
                                 {
@@ -177,6 +178,7 @@ export default function CreateTask({ defaultNameProject }: Props) {
                     </div>
 
                     <div className='w-3/4'>
+                    <label>Time spent</label>
                         <Form.Item
                             rules={[
                                 {

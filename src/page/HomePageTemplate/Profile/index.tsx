@@ -37,7 +37,6 @@ export default function Proflie({ }: Props) {
   if (myProfile === '') return <Navigate to='/login' replace={true} />
 
   const handleUpdate = (values: any) => {
-    console.log(values);
     dispatch(actEditUser(values))
   }
 

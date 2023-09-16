@@ -55,7 +55,6 @@ export const actGetUserByProject = (projectId: any) => {
 export const actGetAllUser = () => {
     return (dispatch: any) => {
         api.get('Users/getUser?keyword=1')
-
             .then((result) => {
                 if (result.data.statusCode === 200) {
                     dispatch({ type: types.GET_ALL_USER, payload: result.data.content })
