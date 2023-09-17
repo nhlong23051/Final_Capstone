@@ -38,6 +38,7 @@ export default function CreateTask({ defaultNameProject }: Props) {
         values = { ...values, description }
 
         dispatch(actCreateTask(values))
+        dispatch({type:CLOSE_DRAWER_CREATE_TASK})
     }
 
     return (
@@ -166,12 +167,6 @@ export default function CreateTask({ defaultNameProject }: Props) {
                     <div className='w-3/4'>
                         <label>Time remaining</label>
                         <Form.Item
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input timeTrackingRemaining!',
-                                },
-                            ]}
                             name='timeTrackingRemaining'>
                             <Input type='number'></Input>
                         </Form.Item>
@@ -180,12 +175,6 @@ export default function CreateTask({ defaultNameProject }: Props) {
                     <div className='w-3/4'>
                     <label>Time spent</label>
                         <Form.Item
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input timeTrackingSpent!',
-                                },
-                            ]}
                             name='timeTrackingSpent'>
                             <Input type='number'></Input>
                         </Form.Item>

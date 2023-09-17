@@ -74,7 +74,7 @@ export default function DetailProject({ }: Props) {
         <DragDropCpn colums={data?.lstTask} />
       </div>
 
-      <Modal className='w-full lg:!w-2/4' title='Add members to project Long' onCancel={closeModalAddUser} open={addUser} footer={[]}>
+      <Modal className='w-full lg:!w-3/4' title='Add members to project Long' onCancel={closeModalAddUser} open={addUser} footer={[]}>
         <Input placeholder='search name ...' className='mb-3' onChange={(e) => {
           dispatch(actSearchUserName(e.target.value))
         }} />
@@ -85,12 +85,12 @@ export default function DetailProject({ }: Props) {
             <div className='overflow-y-auto h-64 lg:h-96'>
               {user?.map((user: any, index: any) => {
                 return <div className='border border-gray-400 p-2 m-2 rounded flex justify-between items-center'>
-                  <div className='flex items-center'>
+                  <div className='flex items-center ' >
                     <span>
                       <Avatar className='mr-2' src={user.avatar} alt=''></Avatar>
                     </span>
-                    <div>
-                      <div>{user.name}</div>
+                    <div className='' >
+                      <div  className='max-w-28 lg:w-full'>{user.name}</div>
                       <div>User ID: {user.userId}</div>
                     </div>
                   </div>
@@ -118,7 +118,7 @@ export default function DetailProject({ }: Props) {
                       <Avatar className='mr-2' src={user.avatar} alt='' > </Avatar>
                     </span>
                     <div>
-                      <div>{user.name}</div>
+                      <div className='max-w-28 lg:w-full' >{user.name}</div>
                       <div>User ID: {user.userId} </div>
                     </div>
                   </div>

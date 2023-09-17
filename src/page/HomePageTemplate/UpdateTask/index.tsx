@@ -29,8 +29,8 @@ export default function FormUpdateTask({ }: Props) {
 
     return (
         <>
-            <Modal destroyOnClose className='!w-1/2' title='Update task' open={isOpen} onCancel={closeModal} footer={[]}>
-                <div className='grid grid-cols-2'>
+            <Modal destroyOnClose className='!w-full md:!w-3/4 xl:!w-1/2' title='Update task' open={isOpen} onCancel={closeModal} footer={[]}>
+                <div className='md:grid md:grid-cols-2'>
                     <div className='overflow-y-auto h-auto max-h-96 pr-3'>
                         {/* --------------- type task --------------------- */}
                         <UpdateTaskType data={data} />

@@ -129,15 +129,13 @@ export const actFetchListStatus = () => {
     }
 }
 
-export const actUpdateStatus = (taskId: any, statusId: any) => {
+export const actUpdateStatus = (data: any) => {
 
     return (dispatch: any) => {
-        const d = { taskId, statusId }
-        api.put('Project/updateStatus', d)
+        api.put('Project/updateStatus', data)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-
-                    // dispatch((result: any) => ({ type: types.GET_ALL_STATUS, payload: result.data.content }))
+                    dispatch(actDetailProject(data.id))
                 }
             })
             .catch((error) => {
