@@ -124,7 +124,7 @@ export default function ContentProject({ }: Props) {
             <div className='grid grid-cols-2 items-center justify-center my-2'>
               <div className=''>Action</div>
               <div className='text-center'>
-                <NavLink to={`/edit-project/1}`}>
+                <NavLink to={`/edit-project/${project.id}}`}>
                   <EditOutlined className='bg-blue-400 rounded p-3 pb-2 mr-1 md:ml-1 hover:bg-gray-300' />
                 </NavLink>
                 <DeleteOutlined className='bg-red-500 rounded p-3 pb-2 mr-1 md:mr-0 hover:bg-gray-300' />

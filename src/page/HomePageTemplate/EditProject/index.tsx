@@ -2,7 +2,7 @@ import { withFormik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react'
 import { connect, useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import * as Yup from 'yup'
 import { actEditProject, actGetInfoProject } from './duck/action';
 import { Form, Input, Select } from 'antd';
@@ -28,7 +28,7 @@ export default function EditProject({ }: Props) {
   }, [])
 
   useEffect(() => {
-    if(infoProject){
+    if (infoProject) {
       setState({
         id: infoProject?.id,
         projectName: infoProject?.projectName,
@@ -63,7 +63,7 @@ export default function EditProject({ }: Props) {
 
   return (
     <>
-      <p className='text-center text-4xl py-4'>Create Project</p>
+      <p className='text-center text-4xl py-4'>Update Project</p>
       <form onSubmit={(e) => handleSubmit(e)} className='px-40'>
         <div className='my-2'>
           <label className='w-full' >ID<span className='text-red-500'>*</span></label>
@@ -109,7 +109,10 @@ export default function EditProject({ }: Props) {
         <div>
           <button type='submit'
             className='bg-blue-500 mr-2 py-2 px-3 rounded hover:text-white'>Update</button>
-          <button className='bg-gray-300 mr-2 py-2 px-3 rounded  hover:text-white'>Cancel</button>
+
+          <button className='bg-gray-300 mr-2 py-2 px-3 rounded  hover:text-white'>
+            <NavLink to='/'>Cancel</NavLink>
+          </button>
         </div>
       </form >
     </>
