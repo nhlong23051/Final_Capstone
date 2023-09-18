@@ -69,7 +69,7 @@ export default function CommentComponent({ data }: Props) {
 
     return (
         <>
-            <div className='mb-1 border p-1'>
+            <div className='my-3 rounded border p-1 overflow-y-auto max-h-80'>
                 <div className='mb-1 text-base font-bold'  >Comments</div>
                 <hr />
 
@@ -81,12 +81,16 @@ export default function CommentComponent({ data }: Props) {
                         onChange={(e) => handValue(e)}
                         className='mx-2 w-3/4 border rounded'
                         placeholder='Add a comment...' />
-                    <RightOutlined type='submit' style={{ width: '30px', height: '30px' }} className=' pt-2 rounded-full hover:bg-gray-300 hover:transition duration-300 ' />
+                    <RightOutlined
+                        onClick={(event) => handleSubmit(event)}
+                        type='submit'
+                        style={{ width: '30px', height: '30px' }}
+                        className=' pt-2 rounded-full hover:bg-gray-300 hover:transition duration-300 ' />
                 </form>
 
                 {state?.lstComment.map((cmt: any) => {
                     return <div key={cmt.id} className='flex items-center ml-2 mb-2'>
-                        
+
                         <Avatar className='cursor-pointer' src={cmt?.avatar} alt=''></Avatar>
                         <div className='flex justify-between w-full items-center'>
                             <div className='ml-4 w-full border rounded-full px-3 py-1'>

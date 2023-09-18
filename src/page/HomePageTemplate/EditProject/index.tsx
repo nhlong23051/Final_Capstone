@@ -63,8 +63,8 @@ export default function EditProject({ }: Props) {
 
   return (
     <>
-      <p className='text-center text-4xl py-4'>Update Project</p>
-      <form onSubmit={(e) => handleSubmit(e)} className='px-40'>
+      <p className='text-2xl text-center md:text-4xl py-4'>Update Project</p>
+      <form onSubmit={(e) => handleSubmit(e)} className='w-full px-3 md:px-40'>
         <div className='my-2'>
           <label className='w-full' >ID<span className='text-red-500'>*</span></label>
           <input className='w-full p-2' value={state.id || ''} disabled />

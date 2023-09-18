@@ -50,7 +50,6 @@ export default function DragDropCpn({ colums }: Props) {
         dispatch(actUpdateStatus(d))
     }
 
-
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <div className='md:grid md:grid-cols-2 xl:grid-cols-4 pt-4 gap-5 mx-10'>
@@ -62,7 +61,7 @@ export default function DragDropCpn({ colums }: Props) {
                                     <span className='bg-purple-200 w-auto p-1 rounded '>{colum.statusName}</span>
                                     {colum.statusId !== '1' ? '' : (
                                         <div className=' w-auto font-xl rounded '>
-                                            <div onClick={() => dispatch({ type: OPEN_DRAWER_CREATE_TASK, payload: <CreateTask /> })} className='cursor-pointer ease-in-out duration-300 p-1 rounded hover:bg-green-400 text-centerrounded'>
+                                            <div onClick={() => dispatch({ type: OPEN_DRAWER_CREATE_TASK, payload: <CreateTask projectId={params.id} /> })} className='cursor-pointer ease-in-out duration-300 p-1 rounded hover:bg-green-400 text-centerrounded'>
                                                 + Create
                                             </div>
                                         </div>

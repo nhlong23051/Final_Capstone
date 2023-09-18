@@ -26,9 +26,9 @@ export default function UpdateTimeTracking({ data }: Props) {
         <div>
             {formTimeTracking ?
                 <>
-                    <div className='flex my-3 items-center rounded p-2 hover:bg-gray-300  hover:transition duration-300' >
+                    <div className='flex my-4 items-center rounded p-2 hover:bg-gray-300  hover:transition duration-300' >
                         <div className='w-2/5'>
-                            <div className='w-full cursor-pointer py-2 rounded' onClick={() => setFormTimeTracking(false)}>Time tracking</div>
+                            <div className='w-full text-base font-bold cursor-pointer py-2 rounded' onClick={() => setFormTimeTracking(false)}>Time tracking</div>
                         </div>
                         <div className='w-3/5'>
                             <Input onChange={(e) => handleChange(e)} name='timeTrackingSpent' className='mb-2' placeholder='Time spent' type='number' />
@@ -40,7 +40,7 @@ export default function UpdateTimeTracking({ data }: Props) {
                 </>
                 :
                 <>
-                    <div className='w-full cursor-pointer py-2 rounded hover:bg-gray-300 hover:transition duration-300' onClick={() => setFormTimeTracking(true)}>Time tracking</div>
+                    <div className='w-full text-base font-bold cursor-pointer py-2 rounded hover:bg-gray-300 hover:transition duration-300' onClick={() => setFormTimeTracking(true)}>Time tracking</div>
                     <div className="icon-wrapper flex">
                         <div >{data?.timeTrackingSpent}m logged</div>
                         <Slider className='w-full' min={0} max={data?.timeTrackingRemaining} defaultValue={data?.timeTrackingRemaining - data?.timeTrackingSpent} />

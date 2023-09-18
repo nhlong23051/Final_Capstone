@@ -127,7 +127,7 @@ export const actUpdatePriority = (data: any) => {
                 }
             })
             .catch((error) => {
-                toast.error(`${error.response.data.content}`, { autoClose: 2000, position: 'top-center' })
+                toast.error(`${error.response.data.content}`, { autoClose: 3000, position: 'top-center' })
                 console.log(error);
             })
     }
@@ -142,7 +142,7 @@ export const actUpdateTimeEstimate = (data: any) => {
                 }
             })
             .catch((error) => {
-                toast.error(`${error.response.data.content}`, { autoClose: 2000, position: 'top-center' })
+                toast.error(`${error.response.data.content}`, { autoClose: 3000, position: 'top-center' })
                 console.log(error);
             })
     }
@@ -157,8 +157,23 @@ export const actUpdateTimeTracking = (data: any) => {
                 }
             })
             .catch((error) => {
-                toast.error(`${error.response.data.content}`, { autoClose: 2000, position: 'top-center' })
+                toast.error(`${error.response.data.content}`, { autoClose: 3000, position: 'top-center' })
                 console.log(error);
+            })
+    }
+}
+
+export const actDeleteTask = (data: any) => {
+    return (dispatch: any) => {
+        api.delete(`Project/removeTask?taskId=${data.taskId}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    toast.success('Delete task success!', { autoClose: 3000, position: 'top-center' })
+                    dispatch(actDetailProject(data.projectId))
+                }
+            })
+            .catch((error) => {
+                toast.error(`${error.response.data.content}`, { autoClose: 3000, position: 'top-center' })
             })
     }
 }

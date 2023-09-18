@@ -30,10 +30,11 @@ export default function UpdateTaskName({ data }: Props) {
     }
 
     return (
-        <div className='mb-1'>
+        <div className='mb-1 py-2 '>
+            <label className='text-base font-bold'>Task name</label>
             {formName ?
                 <>
-                    <input className='py-1 w-full px-3 text-lg mb-1' autoFocus value={state} onChange={(e) => handleValue(e)} />
+                    <input className='text-sm py-2 w-full px-3 md:text-lg mb-1' autoFocus value={state} onChange={(e) => handleValue(e)} />
                     <Button className='' onClick={handleSubmit}>Save</Button>
                     <Button className='bg-red-300 ml-1' onClick={() => setFormName(false)}>Cancel</Button>
                 </>

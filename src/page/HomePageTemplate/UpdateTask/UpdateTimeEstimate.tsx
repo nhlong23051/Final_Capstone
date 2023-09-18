@@ -25,8 +25,8 @@ export default function UpdateTimeEstimate({ data }: Props) {
     }
     
     return (
-        <div className='flex my-3 items-center'>
-            <div className='w-2/5'>Original estimate</div>
+        <div className='flex my-4 items-center'>
+            <div className='w-2/5 text-base font-bold'>Original estimate</div>
             <div className='w-3/5'>
                 {form ?
                     <div className='flex'>

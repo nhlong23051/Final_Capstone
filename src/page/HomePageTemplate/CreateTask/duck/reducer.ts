@@ -14,7 +14,7 @@ const initialState = {
 export const modalCreateTaskReducer = (state = initialState, action: any) => {
     switch (action.type) {
 
-        case types.GET_ALL_USER_TASK:
+        case types.GET_USER_IN_PROJECT:
             state.users = action.payload
             return { ...state }
 

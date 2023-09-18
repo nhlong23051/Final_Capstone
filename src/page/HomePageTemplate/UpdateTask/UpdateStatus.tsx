@@ -27,31 +27,35 @@ export default function UpdateStatus({ data }: Props) {
             statusId: values,
         })
         const d: any = { statusId: values, taskId: data?.taskId }
-        const projectId:any = params.id
+        const projectId: any = params.id
         dispatch(actUpdateStatus(d, projectId))
     }
 
     return (
-        <div className='mb-3'>
-            <Select
-                className='w-60'
-                value={`${state?.statusId}`}
-                onChange={handleChangeStatus}
-                options={[
-                    {
-                        value: '1', label: 'BACKLOG'
-                    },
-                    {
-                        value: '2', label: 'SELECTED FOR DEVELOPMENT'
-                    },
-                    {
-                        value: '3', label: 'IN PROGRESS'
-                    },
-                    {
-                        value: '4', label: 'DONE'
-                    },
-                ]}
-            />
+
+        <div className='flex my-4 items-center'>
+            <div className='w-2/5 text-base font-bold'>Status</div>
+            <div className='w-3/5'>
+                <Select
+                    className='w-full'
+                    value={`${state?.statusId}`}
+                    onChange={handleChangeStatus}
+                    options={[
+                        {
+                            value: '1', label: 'BACKLOG'
+                        },
+                        {
+                            value: '2', label: 'SELECTED FOR DEVELOPMENT'
+                        },
+                        {
+                            value: '3', label: 'IN PROGRESS'
+                        },
+                        {
+                            value: '4', label: 'DONE'
+                        },
+                    ]}
+                />
+            </div>
         </div>
     )
 }

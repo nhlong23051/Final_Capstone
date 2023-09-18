@@ -23,7 +23,6 @@ export default function ContentUser({ }: Props) {
     keyWord = keyWord.toLowerCase()
 
     const handleConfirm = (id: any) => {
-        console.log('id', id);
 
         setConfirmDelete(true)
         setIdUserDelete(id)

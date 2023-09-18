@@ -6,7 +6,7 @@ import { actDeleteProject, actFetchListAllProject } from '../duck/action';
 import { NavLink } from 'react-router-dom';
 import CreateTask from '../../CreateTask';
 import { OPEN_DRAWER_CREATE_TASK } from '../../CreateTask/duck/const';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, WarningOutlined } from '@ant-design/icons';
 
 type Props = {
 
@@ -17,7 +17,10 @@ const { Column, ColumnGroup } = Table;
 export default function ContentProject({ }: Props) {
   const dispatch: any = useDispatch()
   let { loading, data, keyWord } = useSelector((state: any) => state.getAllProductReducer)
-  const [modalCreateTask, setModalCreateTask] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [idProjectDelete, setIdProjectDelete] = useState(0)
+
+
   useEffect(() => {
     dispatch(actFetchListAllProject())
   }, [])
@@ -28,6 +31,12 @@ export default function ContentProject({ }: Props) {
   const handleChange = (value: any) => {
     console.log(value);
   }
+
+  const handleConfirm = (id: any) => {
+    setConfirmDelete(true)
+    setIdProjectDelete(id)
+  }
+
   return (
     <>
       < Table dataSource={data} className='hidden w-full md:inline-block'  >
@@ -54,7 +63,6 @@ export default function ContentProject({ }: Props) {
               {members.slice(0, 3).map((member: any, index) => (
                 <Avatar key={index} src={member.avatar} alt=''></Avatar>
               ))}
-              {/* <Avatar className='cursor-pointer hover:bg-gray-400'>+</Avatar> */}
             </>
           )}
         />
@@ -67,7 +75,7 @@ export default function ContentProject({ }: Props) {
               <Popover placement="left" className='bg-blue-400' title={'Setting'} content={() => <>
 
                 <Button onClick={() => {
-                  dispatch({ type: OPEN_DRAWER_CREATE_TASK, payload: <CreateTask defaultNameProject={record.projectName} /> })
+                  dispatch({ type: OPEN_DRAWER_CREATE_TASK, payload: <CreateTask projectId={record.id} /> })
                 }} > Create task</Button>
 
                 <Button className='block mt-2' >
@@ -82,7 +90,7 @@ export default function ContentProject({ }: Props) {
                 </Button>
               </Popover>
 
-              <Button onClick={() => dispatch(actDeleteProject(record.id))} className='bg-red-500 mx-1 md:mx-0' size="middle">
+              <Button onClick={() => handleConfirm(record.id)} className='bg-red-500 mx-1 md:mx-0' size="middle">
                 <DeleteOutlined className='pb-2 mr-1' />
                 <div className='hidden lg:inline-block'>Delete </div>
               </Button>
@@ -124,10 +132,10 @@ export default function ContentProject({ }: Props) {
             <div className='grid grid-cols-2 items-center justify-center my-2'>
               <div className=''>Action</div>
               <div className='text-center'>
-                <NavLink to={`/edit-project/${project.id}}`}>
+                <NavLink to={`/edit-project/${project.id}`}>
                   <EditOutlined className='bg-blue-400 rounded p-3 pb-2 mr-1 md:ml-1 hover:bg-gray-300' />
                 </NavLink>
-                <DeleteOutlined className='bg-red-500 rounded p-3 pb-2 mr-1 md:mr-0 hover:bg-gray-300' />
+                <DeleteOutlined onClick={() => handleConfirm(project.id)} className='bg-red-500 rounded p-3 pb-2 mr-1 md:mr-0 hover:bg-gray-300' />
               </div>
             </div>
 
@@ -135,6 +143,22 @@ export default function ContentProject({ }: Props) {
         }}
       >
       </List >
+
+      <Modal open={confirmDelete} onCancel={() => setConfirmDelete(false)} footer={[
+        <div className=''>
+          <Button className='bg-red-600 mr-1' onClick={() => {
+            dispatch(actDeleteProject(idProjectDelete))
+            setConfirmDelete(false)
+          }} >Yes</Button>
+          <Button onClick={() => setConfirmDelete(false)}>No</Button>
+        </div>
+      ]}>
+        <div className='h-auto'>
+          <div className='text-xl'>
+            <WarningOutlined className='pb-2 mr-2 text-yellow-400' /> Are you sure to delete this user?
+          </div>
+        </div>
+      </Modal>
     </>
   )
 }

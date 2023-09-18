@@ -64,27 +64,16 @@ export default function Proflie({ }: Props) {
   );
 
   return (
-    <div className='px-52'>
-      <p className='text-center text-4xl py-6'>My Profile</p>
+    <div className='md:px-28 xl:px-52'>
+      <p className='text-xl text-center md:text-4xl py-6'>My Profile</p>
 
+      <div className='px-2 justify-center flex '>
 
-      <Row className='flex flex-grow'>
+        <div className='hidden md:w-1/3 md:inline-block xl:w-1/2' >
+          <img className='w-36 h-36 xl:w-64 xl:h-64 rounded-full' src={myProfile.avatar} alt='' />
+        </div>
 
-        <Col span={8}>
-          <Upload
-            name="avatar"
-            listType="picture-circle"
-            className="avatar-uploader "
-            showUploadList={false}
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            beforeUpload={beforeUpload}
-            onChange={handleChange}
-          >
-            {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-          </Upload>
-        </Col>
-
-        <Col span={16}>
+        <div className='w-full md:w-2/4'>
           <Form onFinish={handleUpdate} className='w-full' initialValues={{
             id: myProfile.id,
             passWord: '',
@@ -134,8 +123,8 @@ export default function Proflie({ }: Props) {
               <Button><NavLink to='/' >Back to Home</NavLink></Button>
             </div>
           </Form>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div >
   )
 }

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { actGetInfoProject } from '../../EditProject/duck/action'
 import { actDetailProject } from '../../DetailProject/duck/action'
 
-export const actGetAllUser = () => {
+export const actGetAllProjects = () => {
     return (dispatch: any) => {
         api.get('Project/getAllProject')
             .then((result) => {
@@ -19,13 +19,13 @@ export const actGetAllUser = () => {
     }
 }
 
-export const actGetAllProjects = () => {
+export const actGetUserInProject = (projectId:any) => {
     return (dispatch: any) => {
-        api.get('Users/getUser')
+        api.get(`Users/getUserByProjectId?idProject=${projectId}`)
 
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    dispatch({ type: types.GET_ALL_USER_TASK, payload: result.data.content })
+                    dispatch({ type: types.GET_USER_IN_PROJECT, payload: result.data.content })
                 }
             })
             .catch((error) => {
@@ -45,8 +45,8 @@ export const actCreateTask = (data: any) => {
                 }
             })
             .catch((error) => {
+                toast.error(`${error.response.data.content}`, { autoClose: 3000, position: 'top-center' })
                 console.log(error);
-                toast.success(`${error.response.data.content}`, { autoClose: 2000, position: 'top-center' })
             })
     }
 }

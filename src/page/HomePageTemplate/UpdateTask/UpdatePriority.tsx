@@ -30,7 +30,7 @@ export default function UpdatePriority({ data }: Props) {
 
     return (
         <div className='flex my-3 items-center'>
-            <div className='w-2/5'>Priority</div>
+            <div className='w-2/5 text-base font-bold'>Priority</div>
             <div className='w-3/5'>
                 <Select
                     className='w-full'

@@ -3,17 +3,20 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { Editor } from '@tinymce/tinymce-react';
-import { actCreateTask, actGetAllProjects, actGetAllUser } from './duck/action';
+import { actCreateTask, actGetAllProjects, actGetUserInProject } from './duck/action';
 import { CLOSE_DRAWER_CREATE_TASK } from './duck/const';
+import { useParams } from 'react-router-dom';
 
 type Props = {
-    defaultNameProject?: string
+    projectId?: any
 }
 
-export default function CreateTask({ defaultNameProject }: Props) {
+export default function CreateTask({ projectId }: Props) {
     const dispatch: any = useDispatch()
     let { users, projects } = useSelector((state: any) => state.modalCreateTaskReducer)
+    const params: any = useParams()
     const editorRef: any = useRef(null);
+    projectId = Number(projectId)
 
     const projectAll: any = []
     projects?.map((project: any, index: any) => {
@@ -25,9 +28,10 @@ export default function CreateTask({ defaultNameProject }: Props) {
     })
 
     useEffect(() => {
-        dispatch(actGetAllUser())
+        dispatch(actGetUserInProject(params.id))
         dispatch(actGetAllProjects())
     }, [])
+
 
     const handleChange = (value: string[]) => {
         console.log(`selected ${value}`);
@@ -35,31 +39,38 @@ export default function CreateTask({ defaultNameProject }: Props) {
 
     const handleValue = (values: any) => {
         let description = editorRef.current.getContent()
-        values = { ...values, description }
+        values = { ...values, projectId, description }
+        console.log(values);
 
         dispatch(actCreateTask(values))
-        dispatch({type:CLOSE_DRAWER_CREATE_TASK})
+        dispatch({ type: CLOSE_DRAWER_CREATE_TASK })
     }
 
     return (
         <>
             <div className='text-center text-xl'>Create task</div>
-            <Form  onFinish={handleValue}>
+            <Form onFinish={handleValue} initialValues={{
+                projectId
+            }}>
                 <div>
                     <label className='' >Project<span className='text-red-500'>*</span></label>
                     <Form.Item
                         rules={[
                             {
                                 required: true,
-                                message: 'Please choose Project!',
+                                message: 'Please input your project!',
                             },
                         ]}
                         name='projectId'>
+
                         <Select
+                            showSearch
                             style={{ width: '100%' }}
-                            defaultValue={defaultNameProject}
+                            placeholder="Search to Select"
+                            optionFilterProp="children"
+                            filterOption={(input: string, options: any) => (options?.label ?? '').toLowerCase().includes(input.toLowerCase())}
+                            defaultValue={projectId || ''}
                             options={projectAll}
-                            allowClear
                         />
                     </Form.Item>
                 </div>
@@ -173,7 +184,7 @@ export default function CreateTask({ defaultNameProject }: Props) {
                     </div>
 
                     <div className='w-3/4'>
-                    <label>Time spent</label>
+                        <label>Time spent</label>
                         <Form.Item
                             name='timeTrackingSpent'>
                             <Input type='number'></Input>
