@@ -45,7 +45,7 @@ export const actCreateTask = (data: any) => {
                 }
             })
             .catch((error) => {
-                toast.error(`${error.response.data.content}`, { autoClose: 3000, position: 'top-center' })
+                toast.error(`Create project fail !`, { autoClose: 3000, position: 'top-center' })
                 console.log(error);
             })
     }

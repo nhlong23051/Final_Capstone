@@ -52,7 +52,6 @@ export default function HomePage({ }: Props) {
       getItem('View profile', 'viewprofile', <NavLink to='/profile'></NavLink>),
     ]),
     getItem('Create project', 'createProject', <NavLink to='/create-project'><PlusSquareOutlined /></NavLink>),
-    getItem('Create task', 'createTask', <NavLink to='/' onClick={() => dispatch({ type: OPEN_DRAWER_CREATE_TASK, payload: <CreateTask /> })} ><PlusCircleOutlined /></NavLink>),
   ];
 
   const {

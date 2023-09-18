@@ -19,7 +19,6 @@ export default function DetailProject({ }: Props) {
   let { data, loading, keyWord, userByProject, user } = useSelector((state: any) => state.detailProjectReducer)
 
   useEffect(() => {
-    // dispatch(actFetchListStatus())
     dispatch(actGetAllUser())
     dispatch(actDetailProject(param.id))
     dispatch(actGetUserByProject(param.id))
@@ -40,13 +39,14 @@ export default function DetailProject({ }: Props) {
   const closeModalAddUser = () => {
     setAddUser(false)
   }
+
   return (
     <>
       <div >
         <div className='pl-2 lg:text-center text-2xl py-3'>Project: {data?.projectName}</div>
         <div className='pl-2 lg:pl-40 text-xl'>
           <span>Members: </span>
-          {data?.members.slice(0,5).map((user: any, index: any) => {
+          {data?.members.slice(0, 5).map((user: any, index: any) => {
             const items: MenuProps['items'] = [
               {
                 key: '1',
@@ -90,7 +90,7 @@ export default function DetailProject({ }: Props) {
                       <Avatar className='mr-2' src={user.avatar} alt=''></Avatar>
                     </span>
                     <div className='' >
-                      <div  className='max-w-28 lg:w-full'>{user.name}</div>
+                      <div className='max-w-28 lg:w-full'>{user.name}</div>
                       <div>User ID: {user.userId}</div>
                     </div>
                   </div>

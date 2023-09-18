@@ -16,7 +16,7 @@ export default function CreateTask({ projectId }: Props) {
     let { users, projects } = useSelector((state: any) => state.modalCreateTaskReducer)
     const params: any = useParams()
     const editorRef: any = useRef(null);
-    projectId = Number(projectId)
+    const [state, setState] = useState(Number(projectId))
 
     const projectAll: any = []
     projects?.map((project: any, index: any) => {
@@ -33,14 +33,18 @@ export default function CreateTask({ projectId }: Props) {
     }, [])
 
 
-    const handleChange = (value: string[]) => {
+    const handleChange = (value: any) => {
         console.log(`selected ${value}`);
+    };
+
+    const handleValueProjectName = (value: any) => {
+        console.log(`selected ${value}`);
+        setState(value)
     };
 
     const handleValue = (values: any) => {
         let description = editorRef.current.getContent()
-        values = { ...values, projectId, description }
-        console.log(values);
+        values = { ...values, projectId: state, description }
 
         dispatch(actCreateTask(values))
         dispatch({ type: CLOSE_DRAWER_CREATE_TASK })
@@ -49,9 +53,7 @@ export default function CreateTask({ projectId }: Props) {
     return (
         <>
             <div className='text-center text-xl'>Create task</div>
-            <Form onFinish={handleValue} initialValues={{
-                projectId
-            }}>
+            <Form onFinish={handleValue} initialValues={{ projectId: state }} >
                 <div>
                     <label className='' >Project<span className='text-red-500'>*</span></label>
                     <Form.Item
@@ -66,10 +68,10 @@ export default function CreateTask({ projectId }: Props) {
                         <Select
                             showSearch
                             style={{ width: '100%' }}
-                            placeholder="Search to Select"
+                            placeholder="Search to Project name"
                             optionFilterProp="children"
+                            onChange={handleValueProjectName}
                             filterOption={(input: string, options: any) => (options?.label ?? '').toLowerCase().includes(input.toLowerCase())}
-                            defaultValue={projectId || ''}
                             options={projectAll}
                         />
                     </Form.Item>
